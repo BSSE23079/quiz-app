@@ -1,0 +1,38 @@
+.optionButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #222;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.optionButton:hover {
+  background-color: #f0f8ff;
+  transform: scale(1.01);
+}
+
+.optionId {
+  background-color: #e0f0ff;
+  color: #0077cc;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.optionText {
+  flex: 1;
+  text-align: left;
+}
+
+.selected {
+  background-color: #cde8ff;
+  border-color: #7bbdff;
+}
