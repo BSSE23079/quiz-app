@@ -1,20 +1,48 @@
-import classes from './Card.module.css';
-import Option from './Option';
+import Option from "./Option";
+import classes from "./Card.module.css";
 
-const Card = ({ question }) => {
+const Card = ({
+  question,
+  options,
+  selectedAnswer,
+  onAnswerSelect,
+  onNext,
+  onPrevious,
+  questionNumber,
+  totalQuestions
+}) => {
   return (
     <div className={classes.container}>
+      <p>Question {questionNumber} of {totalQuestions}</p>
       <div className={classes.card}>
-        <h3>{question.title}</h3>
-
+        <h3>{question}</h3>
+  
         <div className={classes.options}>
-          {question.options.map((option) => (
-            <Option key={option.id} option={option} />
+          {options.map((option, index) => (
+            <Option
+              key={index}
+              option={option}
+              isSelected={option === selectedAnswer}
+              onClick={() => onAnswerSelect(option)}
+            />
           ))}
         </div>
-
-        <div className={classes.nextButtonWrapper}>
-          <button className={classes.nextButton}>Next</button>
+        
+        <div className={classes.navButtons}>
+          <button 
+            onClick={onPrevious}
+            disabled={questionNumber === 1}
+            className={classes.navButton}
+          >
+            Previous
+          </button>
+          <button 
+            onClick={onNext}
+            disabled={questionNumber === totalQuestions}
+            className={classes.navButton}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

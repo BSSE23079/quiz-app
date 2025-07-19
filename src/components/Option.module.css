@@ -1,38 +1,22 @@
 .optionButton {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 20px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  color: #222;
+  display: block;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
+  padding: 12px;
+  margin: 8px 0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .optionButton:hover {
-  background-color: #f0f8ff;
-  transform: scale(1.01);
-}
-
-.optionId {
-  background-color: #e0f0ff;
-  color: #0077cc;
-  font-weight: 600;
-  padding: 6px 10px;
-  border-radius: 6px;
-}
-
-.optionText {
-  flex: 1;
-  text-align: left;
+  background: #f0f8ff;
 }
 
 .selected {
-  background-color: #cde8ff;
-  border-color: #7bbdff;
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
 }

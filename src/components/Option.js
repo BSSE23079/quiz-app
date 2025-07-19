@@ -1,13 +1,12 @@
-import classes from './Option.module.css';
+import classes from "./Option.module.css";
 
-const Option = ({ option }) => {
+const Option = ({ option, isSelected, onClick }) => {
   return (
     <button 
-      className={`${classes.optionButton} ${option.selected ? classes.selected : ''}`}
-      onClick={() => option.onSelect && option.onSelect(option.id)}
+      className={`${classes.optionButton} ${isSelected ? classes.selected : ''}`}
+      onClick={onClick}
     >
-      <span className={classes.optionId}>{option.id}</span>
-      <span className={classes.optionText}>{option.name}</span>
+      {option}
     </button>
   );
 };

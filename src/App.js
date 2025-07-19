@@ -1,43 +1,57 @@
+import { useState } from "react";
 import Card from "./components/Card";
 import Navbar from "./components/Navbar";
+
 function App() {
   const quizData = [
     {
-      title: "Where is Lahore located?",
-      options: [
-        { id: 1, name: "KPK" , isCorrect: true},
-        { id: 2, name: "Sindh" },
-        { id: 3, name: "Balochistan" },
-        { id: 4, name: "Punjab" },
-      ],
-      correctedOptionId: 4
+      question: "Where is Lahore located?",
+      options: ["Punjab", "Sindh", "Balochistan", "KPK"],
+      correctAnswer: "Punjab"
     },
     {
-      title: "Where is capital of Pakistan",
-      options: [
-        { id: 1, name: "Lahore" },
-        { id: 2, name: "Quetta" },
-        { id: 3, name: "Islamabad" },
-        { id: 4, name: "Karachi" },
-      ],
-      correctedOptionId: 3
+      question: "What is capital of Pakistan?",
+      options: ["Lahore", "Islamabad", "Karachi", "Quetta"],
+      correctAnswer: "Islamabad"
     },
-        {
-      title: "Where is national animal of Pakistan",
-      options: [
-        { id: 1, name: "Lion" },
-        { id: 2, name: "Rabbit" },
-        { id: 3, name: "Markhor" },
-        { id: 4, name: "Cat" },
-      ],
-      correctedOptionId: 3
+    {
+      question: "Which device is required for the Internet Connection?",
+      options: ["Modem", "Router", "LAN Cable", "Pen Drive"],
+      correctAnswer: "Modem"
     }
   ];
 
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+ const nextQuestion = () => {
+  setSelectedAnswer(null);
+  setCurrentQuestion(prev => 
+    prev === quizData.length - 1 ? 0 : prev + 1
+  );
+};
+
+const prevQuestion = () => {
+  setSelectedAnswer(null);
+  setCurrentQuestion(prev => 
+    prev === 0 ? quizData.length - 1 : prev - 1
+  );
+};
+
   return (
     <div>
-      <Navbar/>
-      <Card question={quizData[0]}  />
+      <Navbar />
+      <Card 
+        question={quizData[currentQuestion].question}
+        options={quizData[currentQuestion].options}
+        correctAnswer={quizData[currentQuestion].correctAnswer}
+        selectedAnswer={selectedAnswer}
+        onAnswerSelect={setSelectedAnswer}
+        onNext={nextQuestion}
+        onPrevious={prevQuestion}
+        questionNumber={currentQuestion + 1}
+        totalQuestions={quizData.length}
+      />
     </div>
   );
 }
