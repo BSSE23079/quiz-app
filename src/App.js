@@ -3,54 +3,80 @@ import Card from "./components/Card";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const quizData = [
+  const [quizData, setQuizData] = useState([
     {
-      question: "Where is Lahore located?",
-      options: ["Punjab", "Sindh", "Balochistan", "KPK"],
-      correctAnswer: "Punjab"
+      title: "What is the capital of Pakistan?",
+      options: [
+        { isUserSelected: false, name: "Lahore", id: 1, isCorrect: false },
+        { isUserSelected: false, name: "Islamabad", id: 2, isCorrect: true },
+        { isUserSelected: false, name: "Karachi", id: 3, isCorrect: false },
+        { isUserSelected: false, name: "Multan", id: 4, isCorrect: false }
+      ]
     },
     {
-      question: "What is capital of Pakistan?",
-      options: ["Lahore", "Islamabad", "Karachi", "Quetta"],
-      correctAnswer: "Islamabad"
+      title: "Which language is used for web apps?",
+      options: [
+        { isUserSelected: false, name: "Python", id: 1, isCorrect: false },
+        { isUserSelected: false, name: "Java", id: 2, isCorrect: false },
+        { isUserSelected: false, name: "JavaScript", id: 3, isCorrect: true },
+        { isUserSelected: false, name: "C++", id: 4, isCorrect: false }
+      ]
     },
     {
-      question: "Which device is required for the Internet Connection?",
-      options: ["Modem", "Router", "LAN Cable", "Pen Drive"],
-      correctAnswer: "Modem"
+      title: "What is 2 + 2?",
+      options: [
+        { isUserSelected: false, name: "3", id: 1, isCorrect: false },
+        { isUserSelected: false, name: "4", id: 2, isCorrect: true },
+        { isUserSelected: false, name: "5", id: 3, isCorrect: false },
+        { isUserSelected: false, name: "6", id: 4, isCorrect: false }
+      ]
     }
-  ];
+  ]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
 
- const nextQuestion = () => {
-  setSelectedAnswer(null);
-  setCurrentQuestion(prev => 
-    prev === quizData.length - 1 ? 0 : prev + 1
-  );
-};
+  const handleAnswerSelect = (optionId) => {
+    const updatedQuizData = [...quizData];
+    const question = updatedQuizData[currentQuestion];
 
-const prevQuestion = () => {
-  setSelectedAnswer(null);
-  setCurrentQuestion(prev => 
-    prev === 0 ? quizData.length - 1 : prev - 1
-  );
-};
+    question.options = question.options.map((option) => ({
+      ...option,
+      isUserSelected: option.id === optionId
+    }));
+
+    setQuizData(updatedQuizData);
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestion < quizData.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  };
+
+  const prevQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  const handleTimeUp = () => {
+    if (currentQuestion < quizData.length - 1) {
+      nextQuestion();
+    }
+  };
 
   return (
     <div>
       <Navbar />
-      <Card 
-        question={quizData[currentQuestion].question}
+      <Card
+        question={quizData[currentQuestion].title}
         options={quizData[currentQuestion].options}
-        correctAnswer={quizData[currentQuestion].correctAnswer}
-        selectedAnswer={selectedAnswer}
-        onAnswerSelect={setSelectedAnswer}
+        onAnswerSelect={handleAnswerSelect}
         onNext={nextQuestion}
         onPrevious={prevQuestion}
         questionNumber={currentQuestion + 1}
         totalQuestions={quizData.length}
+        onTimeUp={handleTimeUp}
       />
     </div>
   );

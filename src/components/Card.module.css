@@ -44,3 +44,13 @@
 .navButton:hover:not(:disabled) {
   background: #0056b3;
 }
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,33 +1,40 @@
 import Option from "./Option";
+import Timer from "./Timer";
 import classes from "./Card.module.css";
 
 const Card = ({
   question,
   options,
-  selectedAnswer,
   onAnswerSelect,
   onNext,
   onPrevious,
   questionNumber,
-  totalQuestions
+  totalQuestions,
+  onTimeUp
 }) => {
   return (
     <div className={classes.container}>
       <p>Question {questionNumber} of {totalQuestions}</p>
       <div className={classes.card}>
         <h3>{question}</h3>
-  
+ 
+        <Timer 
+          duration={20} 
+          onTimeUp={onTimeUp} 
+          key={questionNumber} 
+        />
+
         <div className={classes.options}>
-          {options.map((option, index) => (
+          {options.map((option) => (
             <Option
-              key={index}
+              key={option.id}
               option={option}
-              isSelected={option === selectedAnswer}
-              onClick={() => onAnswerSelect(option)}
+              isSelected={option.isUserSelected}
+              onClick={() => onAnswerSelect(option.id)}
             />
           ))}
         </div>
-        
+
         <div className={classes.navButtons}>
           <button 
             onClick={onPrevious}

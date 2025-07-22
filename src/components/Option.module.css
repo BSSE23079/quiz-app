@@ -1,22 +1,32 @@
 .optionButton {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 2px solid #ddd;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  background: white;
+  background-color: white;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-.optionButton:hover {
-  background: #f0f8ff;
+.correct {
+  background-color: #c8f7c5;
+  border-color: green;
 }
 
-.selected {
-  background: #007bff;
-  color: white;
-  border-color: #007bff;
+.incorrect {
+  background-color: #f7c5c5;
+  border-color: red;
 }
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
