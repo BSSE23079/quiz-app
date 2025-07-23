@@ -1,15 +1,9 @@
 import classes from "./Option.module.css";
 
 const Option = ({ option, isSelected, onClick }) => {
-  let classNames = classes.optionButton;
-
-  if (isSelected) {
-    classNames += " " + (option.isCorrect ? classes.correct : classes.incorrect);
-  }
-
   return (
     <button 
-      className={classNames}
+      className={isSelected ? classes.selected : classes.optionButton}
       onClick={onClick}
     >
       {option.name}

@@ -14,6 +14,9 @@ const Timer = ({ duration, onTimeUp, key }) => {
       return;
     }
 
+
+
+    
     const timer = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);

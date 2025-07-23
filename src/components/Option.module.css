@@ -1,3 +1,4 @@
+/* Option.module.css */
 .optionButton {
   padding: 12px 20px;
   border: 1px solid #ccc;
@@ -8,14 +9,13 @@
   transition: background-color 0.3s ease;
 }
 
-.correct {
-  background-color: #c8f7c5;
-  border-color: green;
-}
-
-.incorrect {
-  background-color: #f7c5c5;
-  border-color: red;
+.selected {
+  padding: 12px 20px;
+  border: 1px solid #007bff;
+  border-radius: 8px;
+  background-color: #e7f3ff;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .options {
@@ -28,5 +28,3 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-
