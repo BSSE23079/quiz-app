@@ -7,6 +7,7 @@ const Button = ({ onNext, onPrevious, isLast, questionNumber }) => {
         onClick={onPrevious}
         disabled={questionNumber === 1}
         className={classes.navButton}
+        style={{ marginRight: 'auto' }} 
       >
         Previous
       </button>

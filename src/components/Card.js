@@ -36,16 +36,20 @@ const Card = ({
               onClick={() => onAnswerSelect(option.id)}
             />
           ))}
-          <Button 
-            onNext={onNext}
-            onPrevious={onPrevious}
-            questionNumber={questionNumber}
-            isLast={isLastQuestion}
-          />
         </div>
+        
+      
+        <Button 
+          onNext={onNext}
+          onPrevious={onPrevious}
+          questionNumber={questionNumber}
+          isLast={isLastQuestion}
+        />
       </div>
     </div>
   );
 };
 
 export default Card;
+
+   
