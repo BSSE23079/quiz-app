@@ -1,33 +1,33 @@
-   import { useEffect, useState } from "react";
-import classes from "./Timer.module.css";
+import { useEffect, useState } from "react";
+import ProgressBar from "@ramonak/react-progress-bar";
 
-const Timer = ({ duration, onTimeUp, key }) => {
+const Timer = ({ duration, onTimeUp, curentQuestionNumber }) => {
   const [timeLeft, setTimeLeft] = useState(duration);
 
   useEffect(() => {
     setTimeLeft(duration);
-  }, [key, duration]);
+  }, [curentQuestionNumber, duration]);
 
   useEffect(() => {
     if (timeLeft <= 0) {
-      onTimeUp();
-      return;
+      const timeout = setTimeout(() => {
+        onTimeUp();
+      }, 500); 
+      return () => clearTimeout(timeout);
     }
+
     const timer = setTimeout(() => {
-      setTimeLeft(timeLeft - 1);
+      setTimeLeft(prev => prev - 1);
     }, 1000);
-  
+
     return () => clearTimeout(timer);
   }, [timeLeft, onTimeUp]);
 
-  const progressPercentage = (timeLeft / duration) * 100;
+  const progressPercentage = Math.max((timeLeft / duration) * 100, 0);
 
   return (
-    <div className={classes.timerContainer}>
-      <div 
-        className={classes.progressBar}
-        style={{ width: `${progressPercentage}%` }}
-      ></div>
+    <div>
+      <ProgressBar completed={progressPercentage} />
     </div>
   );
 };

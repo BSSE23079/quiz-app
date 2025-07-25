@@ -10,4 +10,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;y7
+export default Navbar;

@@ -59,3 +59,11 @@
 .restartButton:hover {
   background: #0056b3;
 }
+.noAnswer {
+  color: #a94442;
+  background-color: #f2dede;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+}

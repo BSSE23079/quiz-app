@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import Card from './Card';
-import Results from './Result';
-import styles from './QuizManager.module.css';
+import { useState } from "react";
+import QuestionCard from "./QuestionCard";
+import Timer from "./Timer";
+import Results from "./Result";
+import styles from "./QuizManager.module.css";
+import classes from "./QuestionCard.module.css";
+import Button from "./Button";
 
 const QuizManager = ({ quizData: initialQuizData }) => {
-  
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [quizData, setQuizData] = useState(initialQuizData);
+  const [showTimer, setShowTimer] = useState(true);
 
   const handleAnswerSelect = (optionId) => {
     const updatedQuizData = quizData.map((question, qIndex) => {
@@ -30,6 +33,7 @@ const QuizManager = ({ quizData: initialQuizData }) => {
   const nextQuestion = () => {
     if (currentQuestion < quizData.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
+      setShowTimer(true); 
     } else {
       calculateScore();
       setShowScore(true);
@@ -39,15 +43,7 @@ const QuizManager = ({ quizData: initialQuizData }) => {
   const prevQuestion = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
-    }
-  };
-
-  const handleTimeUp = () => {
-    if (currentQuestion < quizData.length - 1) {
-      nextQuestion();
-    } else {
-      calculateScore();
-      setShowScore(true);
+      setShowTimer(false); 
     }
   };
 
@@ -64,7 +60,7 @@ const QuizManager = ({ quizData: initialQuizData }) => {
     setScore(newScore);
   };
 
-  const restartQuiz = () => {  
+  const restartQuiz = () => {
     const resetQuizData = quizData.map((question) => ({
       ...question,
       options: question.options.map((option) => ({
@@ -78,25 +74,44 @@ const QuizManager = ({ quizData: initialQuizData }) => {
     setShowScore(false);
   };
 
+  const totalQusetionCount = quizData.length;
+
   return (
     <div className={styles.quizContainer}>
       {showScore ? (
-        <Results 
-          score={score} 
-          quizData={quizData} 
-          onRestart={restartQuiz} 
-        />
+        <Results score={score} quizData={quizData} onRestart={restartQuiz} />
       ) : (
-        <Card
-          question={quizData[currentQuestion].title}
-          options={quizData[currentQuestion].options}
-          onAnswerSelect={handleAnswerSelect}
-          onNext={nextQuestion}
-          onPrevious={prevQuestion}
-          questionNumber={currentQuestion + 1}
-          totalQuestions={quizData.length}
-          onTimeUp={handleTimeUp}
-        />
+        <div className={classes.container}>
+          <p>
+            Question {currentQuestion + 1} of {totalQusetionCount}
+          </p>
+
+          {showTimer && (
+            <Timer
+              duration={10}
+              onTimeUp={nextQuestion}
+              curentQuestionNumber={currentQuestion}
+            />
+          )}
+
+          <QuestionCard
+            question={quizData[currentQuestion]}
+            onAnswerSelect={handleAnswerSelect}
+          />
+
+          <div className={classes.navButtons}>
+            <Button
+              style={{ background: "red" }}
+              onClick={prevQuestion}
+              className={classes.navButton}
+            >
+              Previous
+            </Button>
+            <Button onClick={nextQuestion} className={classes.navButton}>
+              {currentQuestion + 1 === totalQusetionCount ? "Finish" : "Next"}
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );

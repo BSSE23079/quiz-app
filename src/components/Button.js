@@ -1,20 +1,14 @@
-import classes from "./Card.module.css";
-
-const Button = ({ onNext, onPrevious, isLast, questionNumber }) => {
+const Button = ({ children, color, onClick, className, disabled, style }) => {
+  
   return (
-    <div className={classes.navButtons}>
-      <button
-        onClick={onPrevious}
-        disabled={questionNumber === 1}
-        className={classes.navButton}
-        style={{ marginRight: 'auto' }} 
-      >
-        Previous
-      </button>
-      <button onClick={onNext} className={classes.navButton}>
-        {isLast ? "Finish" : "Next"}
-      </button>
-    </div>
+    <button
+      className={className}
+      onClick={onClick}
+      disabled={disabled}
+      style={{ padding: 10, color: color, ...style }}
+    >
+      {children}
+    </button>
   );
 };
 

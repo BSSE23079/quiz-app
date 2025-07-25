@@ -9,21 +9,17 @@
 }
 
 .selected {
-  padding: 12px 20px;
-  border: 1px solid #007bff;
-  border-radius: 8px;
-  background-color: #e7f3ff;
-  font-size: 16px;
-  cursor: pointer;
+  background-color: #d9eaff; /* Light blue for selected during quiz */
 }
 
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+.correct {
+  background-color: #c8f7c5;
+  border: 2px solid #3cb043;
+  color: #2a6f2c;
+}
+
+.incorrect {
+  background-color: #f7c5c5;
+  border: 2px solid #d2222d;
+  color: #7a1f1f;
 }
