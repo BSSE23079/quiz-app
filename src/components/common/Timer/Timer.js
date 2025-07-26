@@ -27,7 +27,7 @@ const Timer = ({ duration, onTimeUp, curentQuestionNumber }) => {
 
   return (
     <div>
-      <ProgressBar completed={progressPercentage} />
+      < ProgressBar  completed={progressPercentage} />
     </div>
   );
 };

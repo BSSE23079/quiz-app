@@ -1,10 +1,10 @@
 import { useState } from "react";
 import QuestionCard from "./QuestionCard";
-import Timer from "./Timer";
-import Results from "./Result";
+import Timer from "../common/Timer/Timer";
+import Result from "./Result.js";
 import styles from "./QuizManager.module.css";
 import classes from "./QuestionCard.module.css";
-import Button from "./Button";
+import Button from "../common/Button/Button";
 
 const QuizManager = ({ quizData: initialQuizData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -79,7 +79,7 @@ const QuizManager = ({ quizData: initialQuizData }) => {
   return (
     <div className={styles.quizContainer}>
       {showScore ? (
-        <Results score={score} quizData={quizData} onRestart={restartQuiz} />
+        <Result score={score} quizData={quizData} onRestart={restartQuiz} />
       ) : (
         <div className={classes.container}>
           <p>
